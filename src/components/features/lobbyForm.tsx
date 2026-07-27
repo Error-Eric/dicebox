@@ -1,9 +1,11 @@
 import Modal, { ModalProps } from "components/elements/modal";
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { CiLogin, CiShare1 } from "react-icons/ci";
 import { createRoom, joinRoom, getNickname } from "services/ipc";
 
 const LobbyForm: React.FC<ModalProps> = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
   const [nickname, setNickname] = useState<string>();
   const [roomName, setRoomName] = useState<string>();
   const [ticket, setTicket] = useState<string>();
@@ -33,11 +35,11 @@ const LobbyForm: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             if (nickname) {
               if (ticket) {
                 if (await joinRoom(ticket, nickname)) {
-                  window.location.href = "/chat";
+                  navigate("/chat");
                 }
               } else if (roomName) {
                 if (await createRoom(nickname, roomName)) {
-                  window.location.href = "/chat";
+                  navigate("/chat");
                 }
               }
             }
@@ -68,11 +70,11 @@ const LobbyForm: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             if (nickname) {
               if (ticket) {
                 if (await joinRoom(ticket, nickname)) {
-                  window.location.href = "/chat";
+                  navigate("/chat");
                 }
               } else if (roomName) {
                 if (await createRoom(nickname, roomName)) {
-                  window.location.href = "/chat";
+                  navigate("/chat");
                 }
               }
             }

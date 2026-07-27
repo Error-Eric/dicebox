@@ -78,8 +78,8 @@ export default function ChatView({ ticket, onLeave }: ChatViewProps) {
           eventLog={eventLog}
           neighbours={neighbours}
           onLeave={onLeave}
+          roominfo={ticket?.name}
         />
-        <h1 className="text-xl font-bold py-1">{ticket?.name}</h1>
       </div>
       <Messages
         dbMessages={dbMessages}

@@ -1126,7 +1126,7 @@ checksum = "ab03c107fafeb3ee9f5925686dbb7a73bc76e3932abb0d2b365cb64b169cf04c"
 
 [[package]]
 name = "dicebox"
-version = "0.4.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "iroh",

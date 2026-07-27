@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SearchBar from "./search";
 import { MdDelete } from "react-icons/md";
 import {
@@ -19,6 +20,7 @@ import { formatDate } from "utils";
 const RoomsList: React.FC<{
   onRoomSelect?: (room: VisitedRoom) => void;
 }> = ({ onRoomSelect }) => {
+  const navigate = useNavigate();
   const [rooms, setRooms] = useState<VisitedRoom[]>([]);
   const [filter, setFilter] = useState<string>("");
   const [openCreateRoom, setOpenCreateRoom] = useState<boolean>(false);
@@ -75,7 +77,7 @@ const RoomsList: React.FC<{
                     const room = await getLatestTicket();
                     if (room) onRoomSelect(room);
                   } else {
-                    window.location.href = "/chat";
+                    navigate("/chat");
                   }
                 }
               }}

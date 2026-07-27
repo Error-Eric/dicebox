@@ -132,10 +132,9 @@ const Messages: React.FC<MessageProps> = ({
 
       try {
         if (ticket) await addMessage(eventToMessage(newDBMessage, ticket));
-        await sendMessage(messageToSend);
-        // Message is already displayed locally. No further action on success needed here.
+        if (peersOnline) await sendMessage(messageToSend);
       } catch (error) {
-        console.error("Failed to send message via IPC:", error);
+        console.error("Failed to send message:", error);
         setLocalSentMessages((prev) =>
           prev.filter((msg) => msg.displayId !== newLocalMessage.displayId)
         );
@@ -185,8 +184,7 @@ const Messages: React.FC<MessageProps> = ({
         <textarea
           ref={textareaRef}
           className="textarea textarea-bordered textarea-info w-full"
-          placeholder={peersOnline ? "Message" : "No peers online"}
-          disabled={!peersOnline}
+          placeholder="Message"
           rows={1}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
@@ -201,7 +199,7 @@ const Messages: React.FC<MessageProps> = ({
           required
         />
         <button
-          disabled={!inputValue.trim() || submitting || !peersOnline}
+          disabled={!inputValue.trim() || submitting}
           type="submit"
           className="btn bg-blue-950 hover:bg-primary h-auto"
           aria-label="Send message"
